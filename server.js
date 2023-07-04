@@ -17,7 +17,7 @@ mongoose.connect(process.env.MONGO_URL)
         .catch((err)=>{console.log(err.message)});
 
 app.use("/user", userRoute);
-// app.use("/blog", blogRoute);
+app.use("/blog", blogRoute);
 
 app.listen(process.env.PORT, function(){
     console.log("server is running on port ", process.env.PORT );
