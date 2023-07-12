@@ -9,10 +9,10 @@ exports.registerController = async (req,res) => {
     try {
 
         const data = req.body;
-        const {name, email, password} = data;
+        const {userName, email, password} = data;
 
         // user validation
-        if(!name || !email || !password){
+        if(!userName || !email || !password){
             return res.status(400).send({status : false, message : "User all data required"})
         }
 

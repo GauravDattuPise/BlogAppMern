@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { AppBar, Box, Button, Tab, Tabs, Toolbar, Typography } from "@mui/material"
-import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { authActions } from '../redux/Store'
+import { toast } from 'react-hot-toast'
 
 const Header = () => {
 
@@ -11,6 +13,22 @@ const Header = () => {
 
     //state
     const [value, setValue] = useState(1);
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    function handleLogout(){
+        try {
+            dispatch(authActions.logout());
+            toast.success("Logged out Successfully");
+
+            setTimeout(()=>{
+                navigate("/login");
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <>
@@ -43,7 +61,7 @@ const Header = () => {
 
                         {
                             isLogin && <>
-                                <Button sx={{ margin: 1, color: "white" }}>logout</Button>
+                                <Button onClick={handleLogout} sx={{ margin: 1, color: "white" }}>logout</Button>
                             </>
                         }
                     </Box>
