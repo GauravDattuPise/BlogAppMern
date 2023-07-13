@@ -4,17 +4,18 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import moment from "moment"
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import axios from 'axios';
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -27,25 +28,62 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function BlogCard({title, description, image, date, name}) {
+export default function BlogCard({ isUser, title, description, image, date, name, id }) {
 
-  const [expanded, setExpanded] = React.useState(false);
+  const navigate = useNavigate();
+
+  console.log("user is", name);
 
   //  using moment lib , converting date format
-  const newDate = moment(date).format("DD MMM YYYY");
+  const formatedDate = moment(date).format("DD MMM YYYY");
+
+  function handleEditBlog() {
+    
+    // sending blogId to blog edit page via params
+    navigate(`/blogs-edit/${id}`);
+  }
+
+ async function handleDelete(){
+      try {
+        const {data} = await axios.delete(`/blogs/delete-blog/${id}`);
+        if(data?.status){
+          toast.success(data?.message);
+          
+          // forcefully refreshing tab to show for blog is deleted.
+          window.location.reload();
+        }
+      } catch (error) {
+        toast.error("Error in Delete");
+        console.log("error in blog delete", error)
+      }
+  }
 
 
   return (
-    <Card sx={{ width: "40%", margin : "auto", mt : 2, boxShadow : "5px 5px 10px #ccc" }}>
+    <Card sx={{ width: "40%", margin: "auto", mt: 2, boxShadow: "5px 5px 10px #ccc" }}>
+
+      {
+        isUser && (
+          <Box display={'flex'}>
+            <IconButton sx={{ marginLeft: "auto" }} onClick={handleEditBlog}>
+              <EditIcon />
+            </IconButton>
+            <IconButton onClick={handleDelete}>
+              <DeleteIcon />
+            </IconButton>
+          </Box>
+        )
+      }
+      {/* cardheader with titile and date */}
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-           g
+            {name[0]}
           </Avatar>
         }
-       
+
         title={name}
-        subheader={newDate}
+        subheader={formatedDate}
       />
       <CardMedia
         component="img"
@@ -54,15 +92,15 @@ export default function BlogCard({title, description, image, date, name}) {
         alt="blog image"
       />
       <CardContent>
-      <Typography variant="h6" color="text.secondary">
-         Title : {title}
+        <Typography variant="h6" color="text.secondary">
+          Title : {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-         Description : {description}
+          Description : {description}
         </Typography>
       </CardContent>
-   
-     
+
+
     </Card>
   );
 }

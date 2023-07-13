@@ -29,6 +29,21 @@ exports.getUserBlogs = async (req, res) => {
     }
 }
 
+// get blog for update
+exports.getBlog = async (req, res) => {
+
+    try {
+
+        const id = req.params.blogId;
+        // console.log(id)
+        const blog = await blogModel.findById(id);
+        return res.status(200).send({ status: true, message: "My blog", blog });
+
+    } catch (error) {
+        res.status(500).send({ status: false, message: error.message });
+    }
+}
+
 // CREATING BLOG
 exports.createBlog = async (req, res) => {
 

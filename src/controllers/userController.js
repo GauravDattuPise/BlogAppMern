@@ -64,7 +64,7 @@ exports.loginController = async (req,res) => {
         // creting token
         const token = jwt.sign({userId : existingUser._id}, "my-secret-key", {expiresIn : "7d"});
 
-        return res.status(200).send({status : true, message : "Login Successful", user : existingUser, token : token})
+        return res.status(200).send({status : true, message : "Login Successful", user : {name : existingUser.userName, id : existingUser._id}, token : token})
 
     } catch (error) {
         return res.status(500).send({status : false, message : error.message});  

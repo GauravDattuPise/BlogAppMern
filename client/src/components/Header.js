@@ -8,7 +8,8 @@ import { toast } from 'react-hot-toast'
 const Header = () => {
 
     // global state
-    const isLogin = useSelector((state) => state.isLogin);
+    let isLogin = useSelector((state) => state.isLogin);
+    isLogin = isLogin || localStorage.getItem("user");
     console.log(isLogin);
 
     //state
@@ -19,8 +20,11 @@ const Header = () => {
 
     function handleLogout(){
         try {
+
+            // changing isLogin into false, 
             dispatch(authActions.logout());
-            localStorage.removeItem("userId");
+
+            localStorage.removeItem("user");
             toast.success("Logged out Successfully");
 
             setTimeout(()=>{

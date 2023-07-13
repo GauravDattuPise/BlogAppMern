@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom"
+import { json, useNavigate } from "react-router-dom"
 import axios from "axios"
 import { toast } from "react-hot-toast"
 import { useDispatch } from 'react-redux'
@@ -50,8 +50,11 @@ const Login = () => {
         // calling the login function of reducers & making login state as true
         dispatch(authActions.login());
 
-        // setting userId in localstorage
-        localStorage.setItem("userId", res?.data?.user?._id);
+        // converting js object into json string to store in localstorage
+        const user = JSON.stringify(res.data.user);
+
+        // setting user in localstorage
+        localStorage.setItem("user",user);
       }
       else{
         toast.error(res.data.message)

@@ -1,10 +1,10 @@
 
-## BlogApp - MERN
+# BlogApp - MERN
 
 BlogApp is a full-stack web application that allows users to create, read, update, and delete blog posts. Users can sign up, log in, and manage their own blog posts in a user-friendly interface.
 
 
-# Features
+## Features
 
 -- User authentication: Users can sign up, log in, and log out securely.
 
@@ -17,10 +17,10 @@ BlogApp is a full-stack web application that allows users to create, read, updat
 -- User comments: Users can leave comments on blog posts to engage in discussions.
 
 
-# Technologies Used
+## Technologies Used
 
--- Frontend: React, Redux, React Router, Axios, HTML5, CSS3.
--- Backend: Node.js, Express.js, Mongoose, JSON Web Tokens (JWT), bcrypt.
--- Database: MongoDB  
+-- Frontend: React, Redux, React Router, Axios, HTML5, CSS3, MaterialUI etc.
+-- Backend: Node.js, Express.js, Mongoose, JSON Web Tokens (JWT), bcrypt etc.
+-- Database: MongoDB
 
 Github link -- https://github.com/GauravDattuPise/BlogAppMern.git

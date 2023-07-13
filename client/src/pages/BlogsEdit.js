@@ -1,58 +1,72 @@
-import { Box, Button, TextField, Typography } from '@mui/material'
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
+import { Box, Button, TextField, Typography } from '@mui/material'
 import { toast } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
 
+const BlogsEdit = () => {
 
-const CreateBlogs = () => {
+    const id = useParams().id;
 
     const navigate = useNavigate();
+
     const [inputs, setInputs] = useState({
-        title : "",
-        image : "",
-        description : ""
+        title: "",
+        image: "",
+        description: ""
     });
 
-    // getting user from localstore 
-    const user =  JSON.parse(localStorage.getItem("user"))
-
-    function handleInputChange(e){
-        setInputs((prevState)=>({
+    function handleInputChange(e) {
+        setInputs((prevState) => ({
             ...prevState,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         }))
     }
 
-    async function handleSubmit(e){
-        e.preventDefault();
+    async function getBlog() {
         try {
-            const blogData = {
-                title : inputs.title,
-                image : inputs.image,
-                description : inputs.description,
-                user :user.id
-            }
+            const { data } = await axios.get(`/blogs/getSingleBlog/${id}`);
+           
+            if (data?.status === true) {     
+                setInputs({
+                    title: data?.blog?.title,
+                    image: data?.blog?.image,
+                    description: data?.blog?.description
+                });
+            }        
 
-            const {data} = await axios.post("blogs/create-blogs", blogData);
-
-            if(data.status){
-                toast.success(data.message)
-
-                setTimeout(()=>{
-                    navigate("/my-blogs")
-                },1500)
-            }
         } catch (error) {
-            toast.error("Error in creating blog")
-            console.log(error);
+            console.log("error in get single blog", error);
         }
     }
+
+    useEffect(() => {
+        getBlog();
+    }, []);
+
+    async function handleEditBlog(e) {
+        e.preventDefault();
+
+        try {
+            const { data } = await axios.put(`/blogs/update-blog/${id}`, inputs);
+            if(data?.status){
+                toast.success(data?.message);
+                navigate("/my-blogs")
+            }
+        } catch (error) {
+            toast.error("Error in update blog");
+            console.log("error in update blog", error);
+        }
+    }
+
+   
+
+
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <>
+            <form onSubmit={handleEditBlog}>
                 <Box width={"50%"} boxShadow={"10px 10px 20px #ccc"} padding={3} margin={"auto"} marginTop={5} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}  >
-                    <Typography variant='h3' fontWeight={"bold"} color={"gray"} >Create a Post </Typography>
+                    <Typography variant='h4' fontWeight={"bold"} color={"gray"} >Update a Post </Typography>
 
                     <TextField
                         type='text'
@@ -92,11 +106,11 @@ const CreateBlogs = () => {
                         required>
                     </TextField>
 
-                    <Button variant='contained' type='submit' size='large' sx={{ mt: 3 }}>create</Button>
+                    <Button variant='contained' type='submit' size='large' sx={{ mt: 3 }}>Update</Button>
                 </Box>
             </form>
-        </div>
+        </>
     )
 }
 
-export default CreateBlogs
+export default BlogsEdit

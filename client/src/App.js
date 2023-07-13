@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import { Toaster } from "react-hot-toast";
 import UserBlogs from "./pages/UserBlogs";
 import CreateBlogs from "./pages/CreateBlogs";
+import BlogsEdit from "./pages/BlogsEdit";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={ <Blogs/>} />
         <Route path="/my-blogs" element={<UserBlogs/>} />
         <Route path="/create-blogs" element={<CreateBlogs/>} />
+        <Route path="/blogs-edit/:id" element={<BlogsEdit/>}/>
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
       </Routes>
