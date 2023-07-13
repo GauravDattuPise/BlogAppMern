@@ -19,8 +19,10 @@ BlogApp is a full-stack web application that allows users to create, read, updat
 
 ## Technologies Used
 
--- Frontend: React, Redux, React Router, Axios, HTML5, CSS3, MaterialUI etc.
+-- Frontend: React, Redux, React Router, Axios, HTML5, CSS3, MaterialUI etc. 
+
 -- Backend: Node.js, Express.js, Mongoose, JSON Web Tokens (JWT), bcrypt etc.
+
 -- Database: MongoDB
 
 Github link -- https://github.com/GauravDattuPise/BlogAppMern.git
