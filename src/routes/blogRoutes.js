@@ -1,12 +1,15 @@
 const express = require("express");
-const { createBlog, updateBlog, deleteBlog, getAllBlog } = require("../controllers/blogController");
+const { createBlog, updateBlog, deleteBlog, getAllBlog, getUserBlogs } = require("../controllers/blogController");
 const router = express.Router();
 
 // FETCH ALL BLOGS
-router.get("/getAllBlog", getAllBlog)
+router.get("/getAllBlogs", getAllBlog)
+
+// FETCH USER BLOGS
+router.get("/getUserBlogs/:userId", getUserBlogs);
 
 // BLOG CREATION
-router.post("/createBlog", createBlog);
+router.post("/create-blogs", createBlog);
 
 // BLOG UPDATION
 router.put("/updateBlog/:blogId", updateBlog);

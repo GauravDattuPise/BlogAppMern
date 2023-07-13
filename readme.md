@@ -16,12 +16,13 @@ Features
 
 -- User comments: Users can leave comments on blog posts to engage in discussions.
 
--- Responsive design: The application is optimized for both desktop and mobile devices.
 
 Technologies Used
 
 -- Frontend: React, Redux, React Router, Axios, HTML5, CSS3.
+
 -- Backend: Node.js, Express.js, Mongoose, JSON Web Tokens (JWT), bcrypt.
+
 -- Database: MongoDB  
 
 Github link -- https://github.com/GauravDattuPise/BlogAppMern.git

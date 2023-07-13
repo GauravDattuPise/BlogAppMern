@@ -12,7 +12,7 @@ const Header = () => {
     console.log(isLogin);
 
     //state
-    const [value, setValue] = useState(1);
+    const [value, setValue] = useState(0);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -20,6 +20,7 @@ const Header = () => {
     function handleLogout(){
         try {
             dispatch(authActions.logout());
+            localStorage.removeItem("userId");
             toast.success("Logged out Successfully");
 
             setTimeout(()=>{
@@ -44,7 +45,8 @@ const Header = () => {
                                     onChange={(e, val) => setValue(val)}
                                 >
                                     <Tab label="Blogs" LinkComponent={Link} to="/"></Tab>
-                                    <Tab label="my-blogs" LinkComponent={Link} to="/my-blogs"></Tab>
+                                    <Tab label="My blogs" LinkComponent={Link} to="/my-blogs"></Tab>
+                                    <Tab label="Create Blogs" LinkComponent={Link} to="/create-blogs"></Tab>
                                 </Tabs>
                             </Box>
                         </>

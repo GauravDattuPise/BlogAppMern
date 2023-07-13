@@ -5,8 +5,24 @@ exports.getAllBlog = async (req, res) => {
 
     try {
 
-        const allBlog = await blogModel.find();
-        return res.status(200).send({ status: true, message: "All blogs", totalBlogs: allBlog.length, data: allBlog });
+        const blogs = await blogModel.find().populate("user");
+        return res.status(200).send({ status: true, message: "All blogs", totalBlogs: blogs.length, blogs });
+
+    } catch (error) {
+        res.status(500).send({ status: false, message: error.message });
+    }
+}
+
+
+// FETCHING USERS BLOGS
+exports.getUserBlogs = async (req, res) => {
+
+    try {
+
+        const id = req.params.userId;
+        // console.log(id)
+        const blogs = await blogModel.find({user : id});
+        return res.status(200).send({ status: true, message: "My blogs", totalBlogs: blogs.length, blogs });
 
     } catch (error) {
         res.status(500).send({ status: false, message: error.message });

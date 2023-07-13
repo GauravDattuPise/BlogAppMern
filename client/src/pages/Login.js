@@ -49,6 +49,9 @@ const Login = () => {
 
         // calling the login function of reducers & making login state as true
         dispatch(authActions.login());
+
+        // setting userId in localstorage
+        localStorage.setItem("userId", res?.data?.user?._id);
       }
       else{
         toast.error(res.data.message)

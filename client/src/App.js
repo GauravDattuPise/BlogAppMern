@@ -4,6 +4,8 @@ import Register from "./pages/Register";
 import Blogs from "./pages/Blogs";
 import Header from "./components/Header";
 import { Toaster } from "react-hot-toast";
+import UserBlogs from "./pages/UserBlogs";
+import CreateBlogs from "./pages/CreateBlogs";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
       <Header/>
       <Routes>
         <Route path="/" element={ <Blogs/>} />
+        <Route path="/my-blogs" element={<UserBlogs/>} />
+        <Route path="/create-blogs" element={<CreateBlogs/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
       </Routes>
