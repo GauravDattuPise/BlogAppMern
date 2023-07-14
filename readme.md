@@ -10,12 +10,7 @@ BlogApp is a full-stack web application that allows users to create, read, updat
 
 -- Create and manage blog posts: Users can create new blog posts, edit existing ones, and delete posts they own.
 
--- View and search blog posts: Users can view all blog posts on the homepage and search for specific posts by keywords.
-
--- Categories and tags: Blog posts can be categorized and tagged for easy organization and discovery.
-
--- User comments: Users can leave comments on blog posts to engage in discussions.
-
+-- View blog posts: Users can view all blog posts on the homepage of other users and user can see his blogs post on his My-Blog page.
 
 ## Technologies Used
 
@@ -25,4 +20,4 @@ BlogApp is a full-stack web application that allows users to create, read, updat
 
 -- Database: MongoDB
 
-Github link -- https://github.com/GauravDattuPise/BlogAppMern.git
+<!-- Github link -- https://github.com/GauravDattuPise/BlogAppMern.git -->

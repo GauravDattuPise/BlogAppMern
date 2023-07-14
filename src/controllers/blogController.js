@@ -1,6 +1,6 @@
 const blogModel = require("../models/blogModel");
 
-// FETCHING ALL BLOGS
+// FETCHING ALL BLOGS WITH ITS USER
 exports.getAllBlog = async (req, res) => {
 
     try {
@@ -14,13 +14,13 @@ exports.getAllBlog = async (req, res) => {
 }
 
 
-// FETCHING USERS BLOGS
+// FETCHING USER BLOGS
 exports.getUserBlogs = async (req, res) => {
 
     try {
 
         const id = req.params.userId;
-        // console.log(id)
+        
         const blogs = await blogModel.find({user : id});
         return res.status(200).send({ status: true, message: "My blogs", totalBlogs: blogs.length, blogs });
 
@@ -29,13 +29,12 @@ exports.getUserBlogs = async (req, res) => {
     }
 }
 
-// get blog for update
+// GET SIGLE BLOG FOR UPDATE
 exports.getBlog = async (req, res) => {
 
     try {
-
         const id = req.params.blogId;
-        // console.log(id)
+      
         const blog = await blogModel.findById(id);
         return res.status(200).send({ status: true, message: "My blog", blog });
 
@@ -76,7 +75,7 @@ exports.updateBlog = async (req, res) => {
         // updating all fields of blog
         const updatedBlog = await blogModel.findByIdAndUpdate(id, { title: title, description: description, link: link }, { new: true });
 
-        return res.status(200).send({ status: true, message: "Blog update Successful", data: updatedBlog });
+        return res.status(200).send({ status: true, message: "Blog Updated Successfully", data: updatedBlog });
 
     } catch (error) {
         res.status(500).send({ status: false, message: error.message });

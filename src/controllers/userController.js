@@ -25,6 +25,7 @@ exports.registerController = async (req,res) => {
         // hashing password
         data.password = await hashingPassword(password);
 
+        // creating document & saving it
         const user = new userModel(data);
         await user.save();
 
@@ -56,13 +57,13 @@ exports.loginController = async (req,res) => {
         }
 
         // checking password is matching or not
-        const matchedPassword = await matchingPassword(password, existingUser.password);4
+        const matchedPassword = await matchingPassword(password, existingUser.password);
         if(!matchedPassword){
             return res.status(200).send({status : false, message : "Email or Password is incorrect"})
         }
 
         // creting token
-        const token = jwt.sign({userId : existingUser._id}, "my-secret-key", {expiresIn : "7d"});
+        const token = jwt.sign({userId : existingUser._id}, process.env.SECRET_KEY, {expiresIn : "7d"});
 
         return res.status(200).send({status : true, message : "Login Successful", user : {name : existingUser.userName, id : existingUser._id}, token : token})
 
