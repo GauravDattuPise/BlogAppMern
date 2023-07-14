@@ -8,10 +8,9 @@ const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
 
   // getting user from localstorage
-  const userData = JSON.parse(localStorage.getItem("user"))
+  const userData = JSON.parse(localStorage.getItem("user"));
 
-
-  // function for fetching blogs from backend and to assign blogs to blogs state
+  // function for fetching blogs from backend and assign to blogs state
   async function getAllBlogs() {
     try {
       const { data } = await axios.get("/blogs/getAllBlogs");
@@ -19,7 +18,7 @@ const Blogs = () => {
       if (data?.status) {
         setBlogs(data?.blogs);
       }
-      console.log("blogs are", blogs);
+      
     } catch (error) {
       console.log("error in get all blogs", error);
     }
@@ -33,6 +32,7 @@ const Blogs = () => {
 
   return (
     <div>
+      {/* passing blog details as props */}
       {
         blogs && blogs.map(blog =>
           <BlogCard

@@ -42,10 +42,12 @@ const Register = () => {
       if (res.data.status) {
         toast.success(res.data.message);
 
-        setTimeout(()=>{
+        setTimeout(() => {
           navigate("/login")
-        })
+        }, 1500);
+
       }
+      // if email is already exists
       else {
         toast.error(res.data.message)
       }
@@ -60,13 +62,14 @@ const Register = () => {
     <>
       <form onSubmit={handleRegister} >
 
-        <Box maxWidth={350} display={'flex'} flexDirection={'column'} alignItems='center' justifyContent={'center'} margin={'auto'} marginTop={5} >
+        <Box sx={{ background: "rgba(250, 235, 215, 0.218)" }} display={'flex'} flexDirection={'column'} alignItems='center' justifyContent={'center'} margin={'auto'} marginTop={5} width={700} height={500} boxShadow={"10px 10px 10px 10px #ccc"} borderRadius={10}>
 
-          <Typography variant='h3'>Register</Typography>
+          <Typography variant='h2' color={'gray'}>Register</Typography>
 
           {/* name field */}
           <TextField
-            variant='standard'
+            variant='outlined'
+            sx={{ width: "400px", marginTop: "30px" }}
             label="Name"
             type='text'
             name='name'
@@ -78,7 +81,8 @@ const Register = () => {
 
           {/* email field */}
           <TextField
-            variant='standard'
+            variant='outlined'
+            sx={{ width: "400px" }}
             label=" Email"
             type={"email"}
             name='email'
@@ -90,7 +94,8 @@ const Register = () => {
 
           {/* password field */}
           <TextField
-            variant='standard'
+            variant='outlined'
+            sx={{ width: "400px" }}
             label=" Passsword"
             type={'password'}
             name='password'
@@ -101,7 +106,7 @@ const Register = () => {
           />
 
           {/* register button */}
-          <Button type='submit' variant='contained' sx={{ marginTop: 3, borderRadius: 3 }}>register</Button>
+          <Button type='submit' variant='contained' sx={{ marginTop: 3, borderRadius: 3, width: "200px" }}>register</Button>
 
           {/* button for navigate to login */}
           <Button onClick={() => navigate("/login")} sx={{ marginTop: 3, textTransform: 'capitalize' }}>

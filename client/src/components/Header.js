@@ -10,17 +10,17 @@ const Header = () => {
     // global state
     let isLogin = useSelector((state) => state.isLogin);
     isLogin = isLogin || localStorage.getItem("user");
-    console.log(isLogin);
 
-    //state
+    //state for tabs
     const [value, setValue] = useState(0);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    // function to logout
     function handleLogout(){
+       
         try {
-
             // changing isLogin into false, 
             dispatch(authActions.logout());
 
@@ -29,8 +29,10 @@ const Header = () => {
 
             setTimeout(()=>{
                 navigate("/login");
-            })
+            },1500);
+
         } catch (error) {
+            toast.error("Error in logout");
             console.log(error)
         }
     }
@@ -41,6 +43,7 @@ const Header = () => {
                 <Toolbar>
                     <Typography variant='h5' >Mern Blog App</Typography>
                     {
+                        // if user is logged in then show tabs
                         isLogin && <>
                             <Box marginLeft="auto" marginRight="auto">
                                 <Tabs
@@ -58,6 +61,7 @@ const Header = () => {
                     <Box marginLeft="auto">
 
                         {
+                            // if user is not logged in
                             !isLogin && <>
                                 <Button sx={{ margin: 1, color: "white" }} LinkComponent={Link} to='/register'>Register</Button>
                                 <Button sx={{ margin: 1, color: "white" }} LinkComponent={Link} to='/login'>Login</Button>
@@ -66,6 +70,7 @@ const Header = () => {
                         }
 
                         {
+                            // if user is logged in
                             isLogin && <>
                                 <Button onClick={handleLogout} sx={{ margin: 1, color: "white" }}>logout</Button>
                             </>

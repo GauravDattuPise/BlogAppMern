@@ -32,23 +32,23 @@ export default function BlogCard({ isUser, title, description, image, date, name
 
   const navigate = useNavigate();
 
-  console.log("user is", name);
-
-  //  using moment lib , converting date format
+  // converting date format
   const formatedDate = moment(date).format("DD MMM YYYY");
 
-  function handleEditBlog() {
-    
+  function handleEditBlog() {    
     // sending blogId to blog edit page via params
     navigate(`/blogs-edit/${id}`);
   }
 
+  // deleting blog using blogId
  async function handleDelete(){
       try {
+        
         const {data} = await axios.delete(`/blogs/delete-blog/${id}`);
+        
         if(data?.status){
           toast.success(data?.message);
-          
+
           // forcefully refreshing tab to show for blog is deleted.
           window.location.reload();
         }
@@ -60,6 +60,7 @@ export default function BlogCard({ isUser, title, description, image, date, name
 
 
   return (
+    // if isUser is true there user own to that blog.
     <Card sx={{ width: "40%", margin: "auto", mt: 2, boxShadow: "5px 5px 10px #ccc" }}>
 
       {
@@ -85,21 +86,27 @@ export default function BlogCard({ isUser, title, description, image, date, name
         title={name}
         subheader={formatedDate}
       />
+
+      {/* image component */}
       <CardMedia
         component="img"
         height="250"
         image={image}
         alt="blog image"
       />
+
+      {/* card title & description */}
       <CardContent>
+        
         <Typography variant="h6" color="text.secondary">
           Title : {title}
         </Typography>
+        
         <Typography variant="body2" color="text.secondary">
           Description : {description}
         </Typography>
+        
       </CardContent>
-
 
     </Card>
   );

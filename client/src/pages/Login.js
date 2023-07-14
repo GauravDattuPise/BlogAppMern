@@ -70,14 +70,15 @@ const Login = () => {
     <>
       <form onSubmit={handleLogin} >
 
-        <Box maxWidth={350} display={'flex'} flexDirection={'column'} alignItems='center' justifyContent={'center'} margin={'auto'} marginTop={5} >
+        <Box sx={{backgroundColor : 'rgba(250, 235, 215, 0.218)', borderRadius : "30px",  boxShadow:"10px 10px 10px 10px #ccc"}}  display={'flex'} flexDirection={'column'} alignItems='center' justifyContent={'center'} margin={'auto'} padding={3} marginTop={5}  width={650} height={400} >
 
-          <Typography variant='h3'>Login</Typography>
+          <Typography variant='h2' color={'gray'}>Login</Typography>
 
 
           {/* email field */}
           <TextField
-            variant='standard'
+            variant='outlined'
+            sx={{width : "350px", marginTop : "30px"}}
             label=" Email"
             type={"email"}
             name='email'
@@ -89,7 +90,8 @@ const Login = () => {
 
           {/* password field */}
           <TextField
-            variant='standard'
+            variant='outlined'
+            sx={{width : "350px"}}
             label=" Passsword"
             type={'password'}
             name='password'
@@ -100,7 +102,7 @@ const Login = () => {
           />
 
           {/* login button */}
-          <Button type='submit' variant='contained' sx={{ marginTop: 3, borderRadius: 3 }}>login</Button>
+          <Button type='submit' variant='contained' size='large' sx={{ marginTop: 3, borderRadius: 3, width : "200px" }}>login</Button>
 
           {/* button for navigate to register */}
           <Button onClick={() => navigate("/register")} sx={{ marginTop: 3, textTransform: 'capitalize' }}>

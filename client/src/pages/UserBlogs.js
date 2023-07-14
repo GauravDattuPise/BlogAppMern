@@ -3,20 +3,20 @@ import React, { useEffect, useState } from 'react'
 import BlogCard from '../components/BlogCard';
 
 const UserBlogs = () => {
-  
+
   // state for blogs
   const [blogs, setBlogs] = useState([]);
 
   // getting user from localstorage
-  const userData =  JSON.parse(localStorage.getItem("user"))
+  const userData = JSON.parse(localStorage.getItem("user"))
 
   // function for fetching blogs from backend and to assign blogs to blogs state
-  async function getMyBlogs(){
+  async function getMyBlogs() {
     try {
-       
-      const {data} = await axios.get(`/blogs/getUserBlogs/${userData?.id}`);
 
-      if(data?.status){
+      const { data } = await axios.get(`/blogs/getUserBlogs/${userData?.id}`);
+
+      if (data?.status) {
         setBlogs(data?.blogs);
       }
       console.log(blogs)
@@ -27,25 +27,26 @@ const UserBlogs = () => {
   }
 
   // get all my blogs at the time of rendering
-  useEffect(()=>{
+  useEffect(() => {
     getMyBlogs();
   }, []);
- 
+
 
   return (
     <div>
-        {
-         blogs && blogs.map(blog => 
-         <BlogCard
-          isUser = {true}
-          title={blog?.title}
-          id={blog?._id}
-          description={blog?.description}
-          image = {blog?.image}
-          date = {blog?.createdAt}
-           name = {userData?.name}
-          /> )
-        }
+      {/* passing blog data as props to BlogCard component */}
+      {
+        blogs && blogs.map(blog =>
+          <BlogCard
+            isUser={true}
+            title={blog?.title}
+            id={blog?._id}
+            description={blog?.description}
+            image={blog?.image}
+            date={blog?.createdAt}
+            name={userData?.name}
+          />)
+      }
     </div>
   )
 }
