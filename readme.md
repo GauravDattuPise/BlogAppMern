@@ -8,7 +8,7 @@ BlogApp is a full-stack web application that allows users to create, read, updat
 
 -- User authentication: Users can sign up, log in, and log out securely.
 
--- Create and manage blog posts: Users can create new blog posts, edit existing ones, and delete posts they own.
+-- Create and manage blog posts: Users can create new blog posts,read blogs, edit existing ones, and delete posts, Only authorized user can edit or delete their blogs.
 
 -- View blog posts: Users can view all blog posts on the homepage of other users and user can see his blogs post on his My-Blog page.
 
