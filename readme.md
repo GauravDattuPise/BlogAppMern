@@ -19,5 +19,3 @@ BlogApp is a full-stack web application that allows users to create, read, updat
 -- Backend: Node.js, Express.js, Mongoose, JSON Web Tokens (JWT), bcrypt, dotenv etc.
 
 -- Database: MongoDB
-
-<!-- Github link -- https://github.com/GauravDattuPise/BlogAppMern.git -->
